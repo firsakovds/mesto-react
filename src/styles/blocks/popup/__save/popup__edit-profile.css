@@ -1,4 +1,4 @@
-.popup__save-profile {
+.popup__edit-profile{
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -17,11 +17,11 @@
   border-radius: 2px;
   cursor: pointer;
 }
-.popup__save-profile:hover {
+.popup__edit-profile:hover {
   background: rgba(0, 0, 0, 0.8);
 }
 @media (max-width: 905px) {
-  .popup__save-profile {
+  .popup__edit-profile {
     max-width: 238px;
     max-height: 46px;
     margin-bottom: 25px;

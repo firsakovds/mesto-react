@@ -1,48 +1,33 @@
 import "../styles/index.css"
-import logo from "../images/header-logo.svg"
-
+import React from "react";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import PopupWithForm from "./PopupWithForm";
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true)
+  }
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false)
+  }
   return (
     <div className="page">
-     <header className="header">
-   <img className="header__logo" src={logo} alt="логотип" />   
- </header>
- <main className="content">
-   <section className="profile">
-    <button className="profile__avatar-button"></button>
-     <img className="profile__avatar" src="<%=require('./images/profile-avatar.png')%>" alt="изображение человека" />
-     <div className="profile__info">
-       <div className="profile__name">
-         <h1 className="profile__title">Жак-Ив Кусто</h1>
-         <button type="button" className="profile__edit-button"></button>
-       </div>
-       <p className="profile__subtitle">Исследователь океана</p>
-     </div>
-     <button type="button" className="profile__add-button"></button>
-    </section>
-   <section className="elements">
-   </section>
-  </main>
-  <footer className="footer">
-    <p className="footer__copyright">© 2020 Mesto Russia</p>
-  </footer>
-  <template id="elements__card">
-    <div className="element">
-      <button type="button" className="element__delete-button"></button>
-      <img className="element__foto" src="#" alt="#" />
-      <div className="element__group">
-        <h2 className="element__title"></h2>
-        <button type="button" className="element__like"></button>
-        <p className="element__like-counter">0</p>
-      </div>
-     </div>
-  </template>
-  <div className="popup popup_type_edit-profile">
-    <div className="popup__container">
-      <h3 className="popup__title">Редактировать профиль</h3>
-      <form name="formProfile" className="popup__form popup__form_type_profile" >
-        <fieldset className="popup__fielset">
-          <input 
+    <Header />
+    <Main 
+      onEditProfile = {handleEditProfileClick}
+      />
+    <Footer />
+    <PopupWithForm 
+      isOpen = {isEditProfilePopupOpen}
+      onClose = {closeAllPopups}
+      name = "edit-profile"
+      title = "Редактировать профиль"
+      
+      children = {
+        <>
+         <input 
           type="text" 
           name="name"
           id="input-name"
@@ -64,13 +49,23 @@ function App() {
             title="Длина поля должна быть 2 и более символов и менее или равно 200"
             required />
             <span className="popup__error popup__error_type_job"></span>
-          <button type="submit" className="popup__button popup__save-profile" >Сохранить</button>
-        </fieldset>        
-      </form>      
-      <button type="button" className="popup__button-close popup__button-close_type_profile"></button>
-    </div>
-  </div>
-  <div className="popup popup_type_add-card ">
+        </>           
+        }
+        buttonText = "Сохранить"
+    />
+  <template id="elements__card">
+    <div className="element">
+      <button type="button" className="element__delete-button"></button>
+      <img className="element__foto" src="#" alt="#" />
+      <div className="element__group">
+        <h2 className="element__title"></h2>
+        <button type="button" className="element__like"></button>
+        <p className="element__like-counter">0</p>
+      </div>
+     </div>
+  </template>
+  
+  <div className="popup popup_type_add-card  ">
     <div className="popup__container">      
       <h3 className="popup__title">Новое место</h3>
       <form name="place" className="popup__form popup__form_type_add">
@@ -102,14 +97,14 @@ function App() {
       <button type="button" className="popup__button-close popup__button-close_type_add"></button>
     </div>    
   </div>
-  <div className="popup popup_type_image-closer">
+  <div className="popup popup_type_image-closer ">
     <div className="popup__image-container">
       <img className="popup__photo" src="#" alt="#" />
       <p className="popup__photo-text"></p>
       <button type="button" className="popup__button-close popup__button-close_type_image"></button>
     </div>    
   </div>
- <div className="popup popup_type_avatar">
+ <div className="popup popup_type_avatar ">
   <div className="popup__container">      
     <h3 className="popup__title">Обновить аватар</h3>
     <form name="avatar" className="popup__form popup__form_type_avatar">
@@ -130,7 +125,7 @@ function App() {
     <button type="button" className="popup__button-close popup__button-close_type_add"></button>
   </div>    
  </div>
- <div className="popup popup_type_delete">
+ <div className="popup popup_type_delete ">
   <div className="popup__container">      
     <h3 className="popup__title">Вы уверены?</h3>
     <form name="delete" className="popup__form popup__form_type_delete">

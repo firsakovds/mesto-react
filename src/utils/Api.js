@@ -1,4 +1,4 @@
-export default class Api {
+export class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
@@ -26,15 +26,15 @@ export default class Api {
     }).then(this._checkError);
   }
   //3. Редактирование профиля
-  patchUserInfo({name, about}) {
+  patchUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: name,
-        about: about  
-      }),      
-    }).then(this._checkError);    
+        about: about
+      }),
+    }).then(this._checkError);
   }
   //4. Добавление новой карточки
   postNewCard(data) {
@@ -66,9 +66,9 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._checkError);
-  }  
+  }
   //9. Обновление аватара пользователя
-  patchAvatar({avatar}) {
+  patchAvatar({ avatar }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -76,5 +76,13 @@ export default class Api {
         avatar: avatar,
       }),
     }).then(this._checkError);
-  }  
+  }
 }
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+  headers: {
+    authorization: 'fd6fbc3f-6166-47d9-adb3-abe48f771ff4',
+    'Content-Type': 'application/json'
+  }
+});
+export default api

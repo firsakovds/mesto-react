@@ -44,3 +44,4 @@
 @import url(./blocks/popup/__input/_type/popup__input_type_avatar-link.css);
 @import url(./blocks/popup/__save/popup__save_avatar.css);
 @import url(./blocks/popup/__delete-card/popup__delete-card.css);
+@import url(./blocks/spinner/spinner.css);

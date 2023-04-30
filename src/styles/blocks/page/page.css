@@ -1,5 +1,4 @@
-.page {
-  max-width: 1280px;
+.page {  
   margin: 0 auto;
   padding: 0;
   font-family: "Inter", "Arial", sans-serif;
@@ -9,4 +8,5 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   background-color: #000000;
+  min-height: 100vh;
 }

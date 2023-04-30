@@ -8,7 +8,7 @@ function PopupWithForm(props) {
         <form name={`${props.name}`} className={`popup__form popup__form_type_${props.name}`}>
           <fieldset className="popup__fielset">
             {props.children}
-            <button type="submit" className={`popup__button popup__${props.name}`} >{props.buttonText}</button>
+            <button type="submit" className={`popup__button popup__${props.name}`} >{props.buttonText || "Сохранить"}</button>
           </fieldset>
         </form>
         <button type="button" onClick={props.onClose} className={`popup__button-close popup__button-close_type_${props.name}`}></button>

@@ -9,7 +9,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});  
+  const [selectedCard, setSelectedCard] = React.useState({});
   function handleCardClick(card) {
     setSelectedCard(card);
   }
@@ -26,7 +26,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({});
   }
   return (
     <div className="page">
@@ -42,91 +42,80 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         name="edit-profile"
-        title="Редактировать профиль"
-        children={
-          <>
-            <input
-              type="text"
-              name="name"
-              id="input-name"
-              placeholder="Введите имя"
-              className="popup__input popup__input_place_name"
-              minLength="2"
-              maxLength="40"
-              title="Длина поля должна быть 2 и более символов и менее или равно 40"
-              required
-            />
-            <span className="popup__error popup__error_type_name"></span>
-            <input
-              type="text"
-              name="about"
-              id="input-job"
-              placeholder="Введите род деятельности"
-              className="popup__input popup__input_place_job"
-              minLength="2"
-              maxLength="200"
-              title="Длина поля должна быть 2 и более символов и менее или равно 200"
-              required
-            />
-            <span className="popup__error popup__error_type_job"></span>
-          </>
-        }
-        buttonText="Сохранить"
-      />
+        title="Редактировать профиль"        
+      >
+        <input
+          type="text"
+          name="name"
+          id="input-name"
+          placeholder="Введите имя"
+          className="popup__input popup__input_place_name"
+          minLength="2"
+          maxLength="40"
+          title="Длина поля должна быть 2 и более символов и менее или равно 40"
+          required
+        />
+        <span className="popup__error popup__error_type_name"></span>
+        <input
+          type="text"
+          name="about"
+          id="input-job"
+          placeholder="Введите род деятельности"
+          className="popup__input popup__input_place_job"
+          minLength="2"
+          maxLength="200"
+          title="Длина поля должна быть 2 и более символов и менее или равно 200"
+          required
+        />
+        <span className="popup__error popup__error_type_job"></span>
+      </PopupWithForm>
       <PopupWithForm
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         name="save-avatar"
-        title="Обновить аватар"
-        children={
-          <>
-            <input
-              type="url"
-              name="avatar"
-              id="input-avatar"
-              placeholder="Ссылка на аватар"
-              className="popup__input popup__input_type_avatar-link"
-              title="Введите адрес сайта"
-              required
-            />
-            <span className="popup__error popup__error_type_link"></span>
-          </>
-        }
-        buttonText="Сохранить"
-      />
+        title="Обновить аватар"        
+      >
+        <input
+          type="url"
+          name="avatar"
+          id="input-avatar"
+          placeholder="Ссылка на аватар"
+          className="popup__input popup__input_type_avatar-link"
+          title="Введите адрес сайта"
+          required
+        />
+        <span className="popup__error popup__error_type_link"></span>
+      </PopupWithForm>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       <PopupWithForm
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         name="create "
         title="Новое место"
-        children={
-          <>
-            <input
-              type="text"
-              name="name"
-              id="input-space"
-              placeholder="Название"
-              className="popup__input popup__input_place_space"
-              minLength="2"
-              maxLength="30"
-              title="Длина поля должна быть 2 и более символов и менее или равно 30"
-              required
-            />
-            <span className="popup__error popup__error_type_space"></span>
-            <input
-              type="url"
-              name="link"
-              id="input-link"
-              placeholder="Ссылка на картинку"
-              className="popup__input popup__input_place_link"
-              title="Введите адрес сайта"
-              required
-            />
-          </>
-        }
         buttonText="Создать"
-      />
+      >
+        <input
+          type="text"
+          name="name"
+          id="input-space"
+          placeholder="Название"
+          className="popup__input popup__input_place_space"
+          minLength="2"
+          maxLength="30"
+          title="Длина поля должна быть 2 и более символов и менее или равно 30"
+          required
+        />
+        <span className="popup__error popup__error_type_space"></span>
+        <input
+          type="url"
+          name="link"
+          id="input-link"
+          placeholder="Ссылка на картинку"
+          className="popup__input popup__input_place_link"
+          title="Введите адрес сайта"
+          required
+        />
+      </PopupWithForm>
     </div>
   );
 }

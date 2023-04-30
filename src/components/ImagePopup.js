@@ -3,8 +3,7 @@ import React from "react";
 function ImagePopup({ card, onClose }) {
   return (
     <div
-      className={`popup popup_type_image-closer ${card.link ? "popup_opened" : {}
-        }`}
+      className={`popup popup_type_image-closer ${card.link && "popup_opened"}`}
     >
       <div className="popup__image-container">
         <img className="popup__photo" src={card.link} alt={card.name} />

@@ -8,6 +8,7 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/Api"
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup"
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -76,7 +77,16 @@ function handleUpdateUser(name, about ) {
     });
 }
 
-
+function handleUpdateAvatar(avatar ) {
+  api.patchAvatar(avatar)
+  .then((res) => {
+    setCurrentUser(res)
+    closeAllPopups()
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -93,23 +103,7 @@ function handleUpdateUser(name, about ) {
       />
       <Footer />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
-      <PopupWithForm
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        name="save-avatar"
-        title="Обновить аватар"        
-      >
-        <input
-          type="url"
-          name="avatar"
-          id="input-avatar"
-          placeholder="Ссылка на аватар"
-          className="popup__input popup__input_type_avatar-link"
-          title="Введите адрес сайта"
-          required
-        />
-        <span className="popup__error popup__error_type_link"></span>
-      </PopupWithForm>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       <PopupWithForm
         isOpen={isAddPlacePopupOpen}

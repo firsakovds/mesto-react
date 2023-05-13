@@ -9,22 +9,25 @@ function Main(props) {
   const currentUser = React.useContext(CurrentUserContext)
 
   
-  const [cards, setCards] = React.useState([])
-  const [isLoading, setIsLoading] = React.useState(false)
+  //const [cards, setCards] = React.useState([])
+  //const [isLoading, setIsLoading] = React.useState(false)
   
-  React.useEffect(() => {
-    setIsLoading(true)
-    api.getInitialCards()
-      .then((res) => {
-        setCards(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }, [])
+  //React.useEffect(() => {
+  //  setIsLoading(true)
+   // api.getInitialCards()
+   //   .then((res) => {
+    //    setCards(res)
+    //  })
+    //  .catch((err) => {
+    //    console.log(err)
+    //  })
+    //  .finally(() => {
+    //    setIsLoading(false)
+    //  })
+      
+      
+  //}, [])
+  
   return (
     <main className="content">
       <section className="profile">
@@ -40,8 +43,8 @@ function Main(props) {
         <button type="button" className="profile__add-button" onClick={props.onAddPlace}></button>
       </section>
       <section className="elements">
-        {isLoading ? <Spinner /> :
-        cards.map((card) => (
+        {
+        props.cards.map((card) => (
           <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete} />
         ))}
       </section>
@@ -50,3 +53,4 @@ function Main(props) {
 }
 
 export default Main
+//isLoading ? <Spinner /> :

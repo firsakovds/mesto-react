@@ -7,14 +7,14 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api"
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
-
+import EditProfilePopup from "./EditProfilePopup";
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([])
+  const [cards, setCards] = React.useState([]);
   React.useEffect(() => {
     api.getUserInfo()
       .then((res) => {
@@ -24,11 +24,8 @@ function App() {
         console.log(err);
       });
       api.getInitialCards()
-        .then((res) => {
-          setCards(res)
-        })
-        .catch((err) => {
-        console.log(err);
+      .then((res) => {
+        setCards(res)
       });
 
   }, [])
@@ -68,6 +65,17 @@ function handleCardDelete(card) {
   });
 }
 
+function handleUpdateUser(name, about ) {
+  api.patchUserInfo(name, about )
+    .then((res) => {
+      setCurrentUser(res)
+      closeAllPopups()
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 
 
   return (
@@ -81,39 +89,10 @@ function handleCardDelete(card) {
         onCardClick={handleCardClick}
         onCardLike={handleCardLike}
         onCardDelete={handleCardDelete}
+        cards={cards}
       />
       <Footer />
-      <PopupWithForm
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        name="edit-profile"
-        title="Редактировать профиль"        
-      >
-        <input
-          type="text"
-          name="name"
-          id="input-name"
-          placeholder="Введите имя"
-          className="popup__input popup__input_place_name"
-          minLength="2"
-          maxLength="40"
-          title="Длина поля должна быть 2 и более символов и менее или равно 40"
-          required
-        />
-        <span className="popup__error popup__error_type_name"></span>
-        <input
-          type="text"
-          name="about"
-          id="input-job"
-          placeholder="Введите род деятельности"
-          className="popup__input popup__input_place_job"
-          minLength="2"
-          maxLength="200"
-          title="Длина поля должна быть 2 и более символов и менее или равно 200"
-          required
-        />
-        <span className="popup__error popup__error_type_job"></span>
-      </PopupWithForm>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
       <PopupWithForm
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}

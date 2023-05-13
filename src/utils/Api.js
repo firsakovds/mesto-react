@@ -77,6 +77,14 @@ export class Api {
       }),
     }).then(this._checkError);
   }
+  //изменение статуса лайка
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return this.putLikeCard(cardId)
+    } else {
+      return this.deleteLikeCard(cardId)
+    }
+  }
 }
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',

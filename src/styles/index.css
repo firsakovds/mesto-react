@@ -45,3 +45,4 @@
 @import url(./blocks/popup/__save/popup__save_avatar.css);
 @import url(./blocks/popup/__delete-card/popup__delete-card.css);
 @import url(./blocks/spinner/spinner.css);
+@import url(./blocks/element/__delete-button/_hidden/.element__delete-button_hidden.css);
